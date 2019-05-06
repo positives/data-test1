@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doone.pudong.mapper.IndexMapper">
+
+   <select id="query" resultType="java.util.Map" >
+         SELECT *  FROM tb_aaa
+    </select>
+
+
+    <select id="queryIndexMapCount" resultType="java.util.Map">
+        SELECT 	street,count(street) count,
+        sum( CASE WHEN BUSINESS_LICENCE = '1' THEN 1 ELSE 0 END ) AS 'licence1',
+        sum( CASE WHEN BUSINESS_LICENCE = '2' THEN 1 ELSE 0 END ) AS 'licence2'
+        from dwd_qyxx_zb where STREET is not null and LAT is not null and LAT!='' and `LONG` is not null AND `LONG` !=''
+        GROUP BY street
+    </select>
+
+
+</mapper>
